@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace ElkProject.Controllers
 {
@@ -17,9 +15,9 @@ namespace ElkProject.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger logger)
         {
             _logger = logger;
         }
@@ -45,7 +43,7 @@ namespace ElkProject.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"An error in appear in `{nameof(WeatherForecastController)}`.`${nameof(Get)}`. {ex}");
+                _logger.Error(ex, "An error in appear {CustomProperty}", 12);
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }
