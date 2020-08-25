@@ -34,7 +34,7 @@ namespace ElkProject
                                 NumberOfShards = 2,
                                 NumberOfReplicas = 1
                             })
-                        .Enrich.WithProperty("Envirenment", context.HostingEnvironment.EnvironmentName)
+                        .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
                         .ReadFrom.Configuration(context.Configuration);
                 })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
